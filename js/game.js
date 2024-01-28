@@ -37,13 +37,34 @@ export default class Game {
 
     movePieceLeft() {
         this.activePiece.x -= 1;
+
+        // проверить вышли ли мы за пределы поля
+        //если эта так, то необходимо вернуть фигуру на предыд. позицию
+        if (this.isPieceOutOfBounds) {
+            this.activePiece.x += 1;
+        }
     }
 
     movePieceRight() {
         this.activePiece.x += 1;
+
+        if (this.isPieceOutOfBounds) {
+            this.activePiece.x -= 1;
+        }
     }
 
     movePieceDown() {
         this.activePiece.y += 1;
+
+        if (this.isPieceOutOfBounds) {
+            this.activePiece.y -= 1;
+        }
+    }
+
+    isPieceOutOfBounds() { //проверить не вышли ли наши объекты за границей
+        const playfield = this.playfield;
+        const {y, x} = this.activePiece;
+
+        return playfield[y] === undefined || playfield[y][x] === undefined;
     }
 }
