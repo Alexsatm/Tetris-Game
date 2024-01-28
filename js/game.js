@@ -28,11 +28,9 @@ export default class Game {
     activePiece = {
         x: 0,
         y: 0,
-        blocks: [
-            [0, 1, 0],
-            [1, 1, 1],
-            [0, 0, 0],
-        ],
+        get blocks() {
+            return this.rotationIndex[this.rotationIndex]
+        },
 
         rotationIndex: 0,
 
@@ -88,9 +86,22 @@ export default class Game {
     }
 
     rotatePiece() {
-        this.activePiece.rotationIndex = (this.activePiece.rotationIndex + 1) % 4;
-        this.activePiece.blocks = this.activePiece.rotations[this.activePiece.rotationIndex];
-        return this.activePiece;
+        const blocks = this.activePiece.blocks;
+        const length = blocks.length;
+
+       const x = Math.floor(length / 2);
+       const y = length - 1;
+
+       for(let i = 0; i < x; i++) {
+            for(let j = i; j < y - i; j++) {
+                const temp = blocks[i][j];
+
+                blocks[i][j] = blocks[y - j][i];
+                blocks[y - j][i] = blocks[y - i][y - j]
+                blocks[y - i][y - j] = blocks[j][y - i]
+                blocks[j][y - i] = temp;
+            }
+       }
     }
 
     //проверить не вышли ли наши объекты за границей
