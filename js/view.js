@@ -14,4 +14,21 @@ export default class View {
 
         this.element.appendChild(this.canvas);
     }
+
+    renderPlayfiled(playfield) {
+        for(let y = 0; y < playfield.length; y++) {
+            const line = playfield[y];
+            for(let x = 0; x < line.length; x++) {
+                const block = line[x];
+
+                if (block) {
+                    this.context.fillStyle = 'red';
+                    this.context.strokeStyle = 'black'
+                    this.context.lineWidth = 2;
+
+                    this.context.fillRect(x * this.blockWidth, y * this.blockHeight, this.blockWidth, this.blockHeight)
+                }
+            }
+        }
+    }
 }
