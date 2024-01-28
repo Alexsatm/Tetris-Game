@@ -32,6 +32,31 @@ export default class Game {
             [0, 1, 0],
             [1, 1, 1],
             [0, 0, 0],
+        ],
+
+        rotationIndex: 0,
+
+        rotations: [
+            [
+                [0, 1, 0],
+                [1, 1, 1],
+                [0, 0, 0],
+            ],
+            [
+                [0, 1, 0],
+                [0, 1, 1],
+                [0, 1, 0],
+            ],
+            [
+                [0, 0, 0],
+                [1, 1, 1],
+                [0, 1, 0],
+            ],
+            [
+                [0, 1, 0],
+                [1, 1, 0],
+                [0, 1, 0],
+            ],
         ]
     };
 
@@ -60,6 +85,12 @@ export default class Game {
             this.activePiece.y -= 1;
             this.lockPiece();
         }
+    }
+
+    rotatePiece() {
+        this.activePiece.rotationIndex = (this.activePiece.rotationIndex + 1) % 4;
+        this.activePiece.blocks = this.activePiece.rotations[this.activePiece.rotationIndex];
+        return this.activePiece;
     }
 
     //проверить не вышли ли наши объекты за границей
