@@ -86,6 +86,13 @@ export default class Game {
     }
 
     rotatePiece() {
+        this.rotateBlocks();
+       if(this.hasCollision) {
+        this.rotateBlocks()
+       }
+    }
+
+    rotateBlocks(clockwise = true) {
         const blocks = this.activePiece.blocks;
         const length = blocks.length;
 
