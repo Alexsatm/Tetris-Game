@@ -1,4 +1,11 @@
 export default class Game {
+    static points = {
+        '1':40,
+        '2':100,
+        '3':300,
+        '4':1200,
+    };
+
     score = 0;
     lines = 0;
     level = 0;
@@ -231,6 +238,15 @@ export default class Game {
                 lines.unshift(y)
             }
         }
+
+        for(let index of lines) {
+            this.playfield.splice(index, 1);
+            this.playfield.unshift(new Array(colums).fill(0));
+        }
+    }
+
+    updateScore() {
+        
     }
 
     updatePieces() {
