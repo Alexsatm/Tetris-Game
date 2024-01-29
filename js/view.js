@@ -15,7 +15,7 @@ export default class View {
         this.element.appendChild(this.canvas);
     }
 
-    render({playfield}) {
+    render({ playfield }) {
         this.clearScreen();
         this.renderPlayField(playfield);
     }
@@ -27,17 +27,22 @@ export default class View {
     renderPlayField(playfield) {
         for(let y = 0; y < playfield.length; y++) {
             const line = playfield[y];
+
             for(let x = 0; x < line.length; x++) {
                 const block = line[x];
 
                 if (block) {
-                    this.context.fillStyle = 'red';
-                    this.context.strokeStyle = 'black'
-                    this.context.lineWidth = 2;
-
-                    this.context.fillRect(x * this.blockWidth, y * this.blockHeight, this.blockWidth, this.blockHeight)
+                    this.renderBlock(x * this.blockWidth, y * this.blockHeight, this.blockWidth, this.blockHeight, 'red')
                 }
             }
         }
+    }
+
+    renderBlock(x, y, width, height, color) {
+        this.context.fillStyle = 'red';
+        this.context.strokeStyle = 'black'
+        this.context.lineWidth = 2;
+
+        this.context.fillRect(x, y, width, height)
     }
 }

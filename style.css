@@ -2,3 +2,14 @@ body {
     background-color: #131828;;
     text-align: center;
 }
+
+#root {
+    padding: 3rem;
+    text-align: center;
+}
+
+#root canvas {
+    display: block;
+    margin: 0 auto;
+    border: 4px solid white;
+}

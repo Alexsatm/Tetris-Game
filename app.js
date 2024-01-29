@@ -9,24 +9,24 @@ const view = new View(root, 320, 640, 20, 10);
 window.game = game;
 window.view = view;
 
-document.addEventListener('keydown', e => {
-    switch (e.keyCode) {
-        case 37: //left arrow
+document.addEventListener('keydown', (e) => {
+    switch (e.key) {
+        case 'ArrowLeft': //left arrow
             game.movePieceLeft();
             view.render(game.getState())
             break;
 
-        case 38: //UP arrow
+        case 'ArrowUp': //UP arrow
             game.rotatePiece();
             view.render(game.getState())
             break;
 
-        case 39: //RIGHT arrow
+        case 'ArrowRight': //RIGHT arrow
             game.movePieceRight();
             view.render(game.getState())
             break;
 
-        case 40: //DOWN arrow
+        case 'ArrowDown': //DOWN arrow
             game.movePieceDown();
             view.render(game.getState())
             break;
