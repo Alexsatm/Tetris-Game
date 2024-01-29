@@ -39,10 +39,11 @@ export default class View {
     }
 
     renderBlock(x, y, width, height, color) {
-        this.context.fillStyle = 'red';
+        this.context.fillStyle = color;
         this.context.strokeStyle = 'black'
         this.context.lineWidth = 2;
 
         this.context.fillRect(x, y, width, height)
+        this.context.strokeRect(x, y, width, height)
     }
 }
