@@ -2,11 +2,10 @@ export default class Game {
     score = 0;
     lines = 0;
     level = 0;
-    playfield = this.createPlayfield() //игровое поле
 
-    activePiece = this.createPiece()
-
-    nextPiece = this.createPiece() //создание фигуры различного типа
+    playfield = this.createPlayfield(); //игровое поле
+    activePiece = this.createPiece();
+    nextPiece = this.createPiece(); //создание фигуры различного типа
 
 
     getState() {
@@ -24,7 +23,7 @@ export default class Game {
          for (let y = 0; y < blocks.length; y++) {
             for (let x = 0; x < blocks[y].length; x++) {
                 if(blocks[y][x]) {
-                    playfield[pieceY + y][pieceX + x] = blocks[y][x]
+                    playfield[pieceY + y][pieceX + x] = blocks[y][x];
                 }
             }
          }
@@ -47,9 +46,9 @@ export default class Game {
     }
 
     createPiece() {
-        const index = Math.floor(Math.random() * 7)
-        const type = 'IJLOSTZ';
-        const piece = {x:0, y:0}
+        const index = Math.floor(Math.random() * 7);
+        const type = 'IJLOSTZ'[index];
+        const piece = {};
 
         switch(type) {
             case 'I':
@@ -57,7 +56,7 @@ export default class Game {
                     [0, 0, 0, 0],
                     [1, 1, 1, 1],
                     [0, 0, 0, 0],
-                    [0, 0, 0, 0],
+                    [0, 0, 0, 0]
                 ];
                 break;
             case 'J':
@@ -108,9 +107,11 @@ export default class Game {
                 throw new Error('Неизвестный тип фигуры');
         }
 
+        piece.x = Math.floor((10 - piece.blocks[0].length) / 2);
+        piece.y = -1;
+
         return piece;
     };
-
 
 
     movePieceLeft() {
