@@ -145,7 +145,8 @@ export default class Game {
         if (this.hasCollision) {
             this.activePiece.y -= 1;
             this.lockPiece();
-            this.clearLines();
+            const clearedLines = this.clearLines();
+            this.updateScore(clearedLines);
             this.updatePieces()
         }
     }
@@ -243,10 +244,15 @@ export default class Game {
             this.playfield.splice(index, 1);
             this.playfield.unshift(new Array(colums).fill(0));
         }
+
+        return lines.length;
     }
 
-    updateScore() {
-        
+    updateScore(clearedLines) {
+        if(clearedLines > 0) {
+            this.score += Game.points[clearedLines];
+            this.lines += clearedLines;
+        }
     }
 
     updatePieces() {
