@@ -8,11 +8,14 @@ export default class Game {
 
     score = 0;
     lines = 0;
-    level = 0;
 
     playfield = this.createPlayfield(); //игровое поле
     activePiece = this.createPiece();
     nextPiece = this.createPiece(); //создание фигуры различного типа
+
+    get level() {
+        return Math.floor(this.lines * 0.1)
+    }
 
 
     getState() {
@@ -35,6 +38,10 @@ export default class Game {
             }
          }
          return {
+            score,
+            level,
+            lines,
+            nextPiece,
             playfield
          }
     }
@@ -250,7 +257,7 @@ export default class Game {
 
     updateScore(clearedLines) {
         if(clearedLines > 0) {
-            this.score += Game.points[clearedLines];
+            this.score += Game.points[clearedLines] * (this.level + 1);
             this.lines += clearedLines;
         }
     }

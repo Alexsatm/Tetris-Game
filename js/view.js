@@ -26,16 +26,17 @@ export default class View {
         this.element.appendChild(this.canvas);
     }
 
-    render({ playfield }) {
+    render(state) {
         this.clearScreen();
-        this.renderPlayField(playfield);
+        this.renderPlayField(state);
+        this.renderPanel(state)
     }
 
     clearScreen() {
         this.context.clearRect(0, 0, this.width, this.height)
     }
 
-    renderPlayField(playfield) {
+    renderPlayField({playfield}) {
         for(let y = 0; y < playfield.length; y++) {
             const line = playfield[y];
 
@@ -47,6 +48,10 @@ export default class View {
                 }
             }
         }
+    }
+
+    renderPanel({level, score, lines, nextPiece}) {
+
     }
 
     renderBlock(x, y, width, height, color) {
