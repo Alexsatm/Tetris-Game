@@ -20,8 +20,21 @@ export default class View {
         this.canvas.height = this.height;
         this.context = this.canvas.getContext('2d')
 
-        this.blockWidth = this.width / colums;
-        this.blockHeight = this.height / rows;
+        this.playfieldBorderWidth = 4;
+        this.playfieldX = this.playfieldBorderWidth;
+        this.playfieldV = this.playfieldBorderWidth;
+        this.playfieldWidth = this.width * 2 / 3;
+        this.playfieldHeight = this.height;
+        this.playfieldInnerWidth = this.playfieldWidth - this.playfieldBorderWidth * 2;
+        this.playfieldInnerHeight = this.playfieldHeight - this.playfieldBorderWidth * 2;
+
+        this.blockWidth = this.playfieldInnerWidth  / colums;
+        this.blockHeight = this.playfieldInnerHeight / rows;
+
+        this.panelX = this.playfieldWidth + 10;
+        this.panelY = 0;
+        this.panelWidth = this.width / 3;
+        this.panelHeight = this.height
 
         this.element.appendChild(this.canvas);
     }
