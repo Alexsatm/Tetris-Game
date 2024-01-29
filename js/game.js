@@ -35,6 +35,27 @@ export default class Game {
         ]
     };
 
+    getState() {
+        const playfield = this.createPlayfield()
+         for (let y = 0; y < this.playfield.length; y++) {
+            playfield[y] = [];
+            for (let x = 0; x < this.playfield[y].length; x++) {
+                playfield[y][x] = this.playfield[y][x]
+            }
+         }
+
+         for (let y = 0; y < this.activePiece.blocks.length; y++) {
+            for (let x = 0; x < this.activePiece.blocks[y].length; x++) {
+                if(this.activePiece.blocks[y][x]) {
+                    playfield[this.activePiece.y + y][this.activePiece.x + x] = this.activePiece.blocks[y][x];
+                }
+            }
+         }
+         return {
+            playfield
+         }
+    }
+
     movePieceLeft() {
         this.activePiece.x -= 1;
 
