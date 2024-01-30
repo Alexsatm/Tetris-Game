@@ -34,7 +34,7 @@ export default class View {
         this.panelX = this.playfieldWidth + 10;
         this.panelY = 0;
         this.panelWidth = this.width / 3;
-        this.panelHeight = this.height
+        this.panelHeight = this.height;
 
         this.element.appendChild(this.canvas);
     }
@@ -57,7 +57,12 @@ export default class View {
                 const block = line[x];
 
                 if (block) {
-                    this.renderBlock(x * this.blockWidth, y * this.blockHeight, this.blockWidth, this.blockHeight, View.colors[block])
+                    this.renderBlock(
+                    this.playfieldX + (x * this.blockWidth),
+                    this.playfieldX + (y * this.blockHeight),
+                    this.blockWidth,
+                    this.blockHeight,
+                    View.colors[block])
                 }
             }
         }
@@ -69,10 +74,10 @@ export default class View {
         this.context.fillStyle = 'white';
         this.context.font = '14px "serif"';
 
-        this.context.fillText(`Score: ${score}`, 0, 0);
-        this.context.fillText(`Lines: ${lines}`, 0, 24);
-        this.context.fillText(`Level: ${level}`, 0, 48);
-        this.context.fillText('Next', 0, 96);
+        this.context.fillText(`Score: ${score}`, this.panelX, this.panelY + 0);
+        this.context.fillText(`Lines: ${lines}`, this.panelX, this.panelY + 24);
+        this.context.fillText(`Level: ${level}`, this.panelX, this.panelY + 48);
+        this.context.fillText('Next:', this.panelX, this.panelY + 96);
 
         for(let y = 0; y < nextPiece.blocks.length; y++) {
             for(let x = 0; x < nextPiece.blocks[y].length; x++) {
