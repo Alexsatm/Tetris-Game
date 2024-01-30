@@ -7,7 +7,7 @@ export default class Game {
     };
 
     constructor() {
-        this.reset()
+        this.reset();
     }
 
     get level() {
@@ -43,6 +43,16 @@ export default class Game {
             isGameOver: this.topOut
          }
     }
+
+    reset() {
+        score = 0;
+        lines = 0;
+        topOut = false;
+        playfield = this.createPlayfield(); //игровое поле
+        activePiece = this.createPiece();
+        nextPiece = this.createPiece(); //создание фигуры различного типа
+    }
+
 
     createPlayfield() {
         const playfield = [];
