@@ -6,6 +6,8 @@ export default class Controller {
         this.isPlaying = false;
 
         document.addEventListener('keydown', this.handleKeyDown.bind(this))
+        document.addEventListener('keyup', this.handleKeyUp.bind(this))
+
         this.view.renderStartScreen();
     }
     update() {
@@ -26,7 +28,11 @@ export default class Controller {
     }
 
     updateView() {
-        if(!this.intervalId){
+        const state = this.game.getState()
+
+        if(state.isGameOver){
+            this.view.renderEndScreen(state);
+        } else if(!this.intervalId){
             this.view.renderPauseScreen();
         } else {
             this.view.renderMainScreen(this.game.getState());
@@ -60,23 +66,32 @@ export default class Controller {
                     break;
                 case 'ArrowLeft': //left arrow
                     this.game.movePieceLeft();
-                    this.view.renderMainScreen(game.getState())
+                    this.updateView();
                     break;
         
                 case 'ArrowUp': //UP arrow
                     this.game.rotatePiece();
-                    this.view.renderMainScreen(game.getState())
+                    this.updateView();
                     break;
         
                 case 'ArrowRight': //RIGHT arrow
                     this.game.movePieceRight();
-                    this.view.renderMainScreen(game.getState())
+                    this.updateView();
                     break;
         
                 case 'ArrowDown': //DOWN arrow
+                    this.stopTimer();
                     this.game.movePieceDown();
-                    this.view.renderMainScreen(game.getState())
+                    this.updateView();
                     break;
             }
+        }
+
+    handleKeyUp(e) {
+        switch (e.keyCode) {
+            case 40: //down
+            this.startTimer();
+            break;
+        }
     }
 }
