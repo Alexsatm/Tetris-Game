@@ -39,14 +39,10 @@ export default class View {
         this.element.appendChild(this.canvas);
     }
 
-    render(state) {
+    renderMainScreen(state) {
         this.clearScreen();
         this.renderPlayField(state);
         this.renderPanel(state)
-    }
-
-    clearScreen() {
-        this.context.clearRect(0, 0, this.width, this.height)
     }
 
     renderStartScreen() {
@@ -76,7 +72,11 @@ export default class View {
         this.context.textAlign = 'start';
         this.context.textBaseline = 'middle';
         this.context.fillText('Game Over', this.width / 2, this.height / 2 - 48);
-        this.context.fillText(`Score: ${score}`,this.width / 2, this.height / 2 ;
+        this.context.fillText(`Score: ${score}`,this.width / 2, this.height / 2);
+    }
+
+    clearScreen() {
+        this.context.clearRect(0, 0, this.width, this.height)
     }
 
     renderPlayField({playfield}) {
