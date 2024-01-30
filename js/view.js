@@ -49,7 +49,13 @@ export default class View {
         this.context.clearRect(0, 0, this.width, this.height)
     }
 
-    
+    renderStartScreen() {
+        this.context.fillStyle = 'white';
+        this.context.font = '14px "serif"';
+        this.context.textAlign = 'start';
+        this.context.textBaseline = 'middle';
+        this.context.fillText('Press ENTER to start', this.width / 2, this.height / 2);
+    }
 
     renderPlayField({playfield}) {
         for(let y = 0; y < playfield.length; y++) {
@@ -76,7 +82,7 @@ export default class View {
 
     renderPanel({level, score, lines, nextPiece}) {
         this.context.textAlign = 'start';
-        this.context.textBaseline = 'top'
+        this.context.textBaseline = 'top';
         this.context.fillStyle = 'white';
         this.context.font = '14px "serif"';
 
