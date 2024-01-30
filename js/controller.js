@@ -2,10 +2,12 @@ export default class Controller {
     constructor(game, view) {
         this.game = game;
         this.view = view;
+        this.intervalId = null  ;
+        this.isPlaying = false;
 
-        setInterval(() => {
+        this.intervalId = setInterval(() => {
             this.update();
-        }, 1000)
+        }, 1000);
 
         document.addEventListener('keydown', this.handleKeyDown.bind(this))
         this.view.renderStartScreen();
@@ -15,10 +17,23 @@ export default class Controller {
         this.view.renderMainScreen(this.game.getState());
     }
 
+    play() {
+        this.isPlaying = true;
+    }
+
+    pause() {
+        this.isPlaying = false;
+    }
+
         handleKeyDown(e) {
             switch (e.key) {
                 case 13: //Enter
-                    this.view.renderMainScreen(this.game.getState())
+                    if (this.isPlaying) {
+                        this.pause();
+                    }else {
+                        this.play()
+                    }
+                    break;
                 case 'ArrowLeft': //left arrow
                     this.game.movePieceLeft();
                     this.view.renderMainScreen(game.getState())
