@@ -57,6 +57,14 @@ export default class View {
         this.context.fillText('Press ENTER to start', this.width / 2, this.height / 2);
     }
 
+    renderPauseScreen() {
+        this.context.fillStyle = 'white';
+        this.context.font = '14px "serif"';
+        this.context.textAlign = 'start';
+        this.context.textBaseline = 'middle';
+        this.context.fillText('Press ENTER to Resume', this.width / 2, this.height / 2);
+    }
+
     renderPlayField({playfield}) {
         for(let y = 0; y < playfield.length; y++) {
             const line = playfield[y];
