@@ -2,12 +2,8 @@ export default class Controller {
     constructor(game, view) {
         this.game = game;
         this.view = view;
-        this.intervalId = null  ;
+        this.intervalId = null;
         this.isPlaying = false;
-
-        this.intervalId = setInterval(() => {
-            this.update();
-        }, 1000);
 
         document.addEventListener('keydown', this.handleKeyDown.bind(this))
         this.view.renderStartScreen();
@@ -23,6 +19,21 @@ export default class Controller {
 
     pause() {
         this.isPlaying = false;
+    }
+
+    startTimer() {
+        if (!this.intervalId) {
+            this.intervalId = setInterval(() => {
+                this.update();
+            }, 1000);
+        }
+    }
+
+    stopTimer() {
+        if (this.intervalId) {
+            clearInterval(this.intervalId);
+            this.intervalId = null
+        }
     }
 
         handleKeyDown(e) {
