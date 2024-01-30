@@ -10,15 +10,27 @@ export default class Controller {
     }
     update() {
         this.game.movePieceDown();
-        this.view.renderMainScreen(this.game.getState());
+        this.updateView;
     }
 
     play() {
         this.isPlaying = true;
+        this.startTimer();
+        this.updateView;
     }
 
     pause() {
         this.isPlaying = false;
+        this.stopTimer();
+        this.updateView;
+    }
+
+    updateView() {
+        if(!this.intervalId){
+            this.view.renderPauseScreen();
+        } else {
+            this.view.renderMainScreen(this.game.getState());
+        }
     }
 
     startTimer() {
@@ -32,7 +44,7 @@ export default class Controller {
     stopTimer() {
         if (this.intervalId) {
             clearInterval(this.intervalId);
-            this.intervalId = null
+            this.intervalId = null;
         }
     }
 
