@@ -6,13 +6,9 @@ export default class Game {
         '4':1200,
     };
 
-    score = 0;
-    lines = 0;
-    topOut = false;
-
-    playfield = this.createPlayfield(); //игровое поле
-    activePiece = this.createPiece();
-    nextPiece = this.createPiece(); //создание фигуры различного типа
+    constructor() {
+        this.reset()
+    }
 
     get level() {
         return Math.floor(this.lines * 0.1)

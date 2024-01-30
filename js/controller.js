@@ -27,6 +27,11 @@ export default class Controller {
         this.updateView;
     }
 
+    reset() {
+        this.game.reset();
+        this.play();
+    }
+
     updateView() {
         const state = this.game.getState()
 
@@ -56,9 +61,12 @@ export default class Controller {
     }
 
         handleKeyDown(e) {
+            const state = this.game.getState()
             switch (e.key) {
                 case 13: //Enter
-                    if (this.isPlaying) {
+                    if (state.isGameOver) {
+                        this.reset();
+                    }else if (this.isPlaying) {
                         this.pause();
                     }else {
                         this.play()
