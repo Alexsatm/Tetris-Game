@@ -49,6 +49,8 @@ export default class View {
         this.context.clearRect(0, 0, this.width, this.height)
     }
 
+    
+
     renderPlayField({playfield}) {
         for(let y = 0; y < playfield.length; y++) {
             const line = playfield[y];
@@ -66,6 +68,10 @@ export default class View {
                 }
             }
         }
+
+        this.context.strokeStyle = 'white';
+        this.context.lineWidth = this.playfieldBorderWidth;
+        this.context.strokeRect(0, 0, this.playfieldWidth, this.playfieldHeight)
     }
 
     renderPanel({level, score, lines, nextPiece}) {
@@ -81,14 +87,14 @@ export default class View {
 
         for(let y = 0; y < nextPiece.blocks.length; y++) {
             for(let x = 0; x < nextPiece.blocks[y].length; x++) {
-                const block = nextPiece.blocks[y][x]
+                const block = nextPiece.blocks[y][x];
 
                 if(block) {
                     this.renderBlock(
-                        x * this.blockWidth,
-                        y * this.blockHeight,
-                        this.blockWidth,
-                        this.blockHeight,
+                        this.panelX + (x * this.blockWidth * 0.5),
+                        this.panelY + 100 + (y * this.blockHeight * 0.5),
+                        this.blockWidth * 0.5,
+                        this.blockHeight * 0.5,
                         View.colors[block]
                     )
                 }
